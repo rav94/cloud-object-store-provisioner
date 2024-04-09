@@ -6,7 +6,7 @@ on:
       cloud_provider:
         description: 'Cloud Provider (aws or gcp)'
         required: true
-        default: 'aws'
+        default: 'AWS'
       region:
         description: 'Cloud Provider Region (us-west-2, us-east-1, etc)'
         required: true
@@ -29,10 +29,10 @@ jobs:
 
     - name: Terraform Init and Apply
       run: |
-        if [ "${{ github.event.inputs.cloud_provider }}" == "aws" ]; then
+        if [ "${{ github.event.inputs.cloud_provider }}" == "AWS" ]; then
           cd aws
 
-        elif [ "${{ github.event.inputs.cloud_provider }}" == "gcp" ]; then
+        elif [ "${{ github.event.inputs.cloud_provider }}" == "GCP" ]; then
           cd gcp
         fi
         terraform init
