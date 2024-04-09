@@ -12,8 +12,8 @@ terraform {
 module "aws_s3_bucket" {
     source = "github.com/rav94/demo-terraform-modules//aws_s3_bucket?ref=main"
 
-    region      = "us-east-1"
-    bucket_name = "cloud-native-sl-bucket"
+    region      = var.region
+    bucket_name = var.bucket_name
     tags        = {
         Name        = "cloud-native-sl-bucket"
         Environment = "Production"

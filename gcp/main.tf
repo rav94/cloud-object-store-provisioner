@@ -13,8 +13,8 @@ module "gcp_cloud_storage" {
     source = "github.com/rav94/demo-terraform-modules//gcp_cloud_storage?ref=main"  
     
     project_id  = var.project_id
-    region = "us-central1"
-    bucket_name = "cloud-native-sl-bucket"
+    region = var.region
+    bucket_name = var.bucket_name
     location    = "US"
     labels = {
         name        = "cloud-native-sl-bucket"

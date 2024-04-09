@@ -10,7 +10,7 @@ on:
       region:
         description: 'Cloud Provider Region (us-west-2, us-east-1, etc)'
         required: true
-        default: 'us-west-2'
+        default: 'us-east-1'
       bucket_name:
         description: 'Cloud Bucket Name'
         required: true
@@ -36,4 +36,4 @@ jobs:
           cd gcp
         fi
         terraform init
-        terraform apply -auto-approve
+        terraform apply -var region=${{ github.event.inputs.region }} -var bucket_name=${{ github.event.inputs.bucket_name }} -auto-approve
