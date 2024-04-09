@@ -1,0 +1,39 @@
+name: Deploy Cloud Storage Bucket
+
+on:
+  workflow_dispatch:
+    inputs:
+      cloud_provider:
+        description: 'Cloud Provider (aws or gcp)'
+        required: true
+        default: 'aws'
+      region:
+        description: 'Cloud Provider Region (us-west-2, us-east-1, etc)'
+        required: true
+        default: 'us-west-2'
+      bucket_name:
+        description: 'Cloud Bucket Name'
+        required: true
+        default: 'cloud-native-sl-bucket'
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Set up Terraform
+      uses: hashicorp/setup-terraform@v1
+      with:
+        cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+
+    - name: Terraform Init and Apply
+      run: |
+        if [ "${{ github.event.inputs.cloud_provider }}" == "aws" ]; then
+          cd aws
+
+        elif [ "${{ github.event.inputs.cloud_provider }}" == "gcp" ]; then
+          cd gcp
+        fi
+        terraform init
+        terraform apply -auto-approve
