@@ -28,6 +28,9 @@ jobs:
         cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
     - name: Terraform Init and Apply
+      env:
+        TF_VAR_region: ${{ github.event.inputs.region }}
+        TF_VAR_bucket_name: ${{ github.event.inputs.bucket_name }}
       run: |
         if [ "${{ github.event.inputs.cloud_provider }}" == "AWS" ]; then
           cd aws
@@ -36,4 +39,4 @@ jobs:
           cd gcp
         fi
         terraform init
-        terraform apply -var region=${{ github.event.inputs.region }} -var bucket_name=${{ github.event.inputs.bucket_name }} -auto-approve
+        terraform apply -auto-approve

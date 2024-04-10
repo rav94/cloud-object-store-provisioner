@@ -1,13 +1,13 @@
-# terraform {
-#     required_version = ">= 0.13"
-#     backend "remote" {
-#         hostname     = "app.terraform.io"
-#         organization = "ravnf-personal"
-#         workspaces {
-#             name = "cloud-object-storage-gcp"
-#         }
-#     }
-# }
+terraform {
+    required_version = ">= 0.13"
+    backend "remote" {
+        hostname     = "app.terraform.io"
+        organization = "ravnf-personal"
+        workspaces {
+            name = "cloud-object-storage-gcp"
+        }
+    }
+}
 
 module "gcp_cloud_storage" {
     source = "github.com/rav94/demo-terraform-modules//gcp_cloud_storage?ref=main"  
